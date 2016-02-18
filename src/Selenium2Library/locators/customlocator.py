@@ -1,7 +1,7 @@
 from robot.libraries.BuiltIn import BuiltIn
 
 try:
-    string_type = basestring
+    string_type = str
 except NameError:
     string_type = str
 

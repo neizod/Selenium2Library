@@ -1,4 +1,4 @@
-#! /usr/bin/env python
+#! /usr/bin/env python3
 
 """Runner Script for Robot Framework SeleniumLibrary Demo
 
@@ -32,10 +32,10 @@ from subprocess import Popen, call, STDOUT
 
 try:
     import Selenium2Library
-except ImportError, e:
-    print 'Importing Selenium2Library module failed (%s).' % e
-    print 'Please make sure you have Selenium2Library properly installed.'
-    print 'See INSTALL.rst for troubleshooting information.'
+except ImportError as e:
+    print('Importing Selenium2Library module failed (%s).' % e)
+    print('Please make sure you have Selenium2Library properly installed.')
+    print('See INSTALL.rst for troubleshooting information.')
     sys.exit(1)
 
 
@@ -49,18 +49,18 @@ def run_tests(args):
     stop_demo_application()
 
 def start_demo_application():
-    Popen(['python', DEMOAPP, 'start'], stdout=TemporaryFile(), stderr=STDOUT)
+    Popen(['python3', DEMOAPP, 'start'], stdout=TemporaryFile(), stderr=STDOUT)
 
 def stop_demo_application():
-    call(['python', DEMOAPP, 'stop'], stdout=TemporaryFile(), stderr=STDOUT)
+    call(['python3', DEMOAPP, 'stop'], stdout=TemporaryFile(), stderr=STDOUT)
 
 def print_help():
-    print __doc__
+    print(__doc__)
 
 def print_usage():
-    print 'Usage: rundemo.py [options] datasource'
-    print '   or: rundemo.py demoapp start|stop'
-    print '   or: rundemo.py help'
+    print('Usage: rundemo.py [options] datasource')
+    print('   or: rundemo.py demoapp start|stop')
+    print('   or: rundemo.py help')
 
 
 if __name__ == '__main__':

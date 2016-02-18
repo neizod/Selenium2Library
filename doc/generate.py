@@ -1,10 +1,10 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 from os.path import join, dirname
 try:
     from robot.libdoc import libdoc
 except:
     def main():
-        print """Robot Framework 2.7 or later required for generating documentation"""
+        print("""Robot Framework 2.7 or later required for generating documentation""")
 else:
     def main():
         libdoc(join(dirname(__file__),'..','src','Selenium2Library'), join(dirname(__file__),'Selenium2Library.html'))

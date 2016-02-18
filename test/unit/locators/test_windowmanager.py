@@ -303,7 +303,7 @@ class WindowManagerTests(unittest.TestCase):
                 if window.handle == handle_or_name or window.name == handle_or_name:
                     browser.current_window = window
                     return
-            raise NoSuchWindowException(u'Unable to locate window "' + handle_or_name + '"')
+            raise NoSuchWindowException('Unable to locate window "' + handle_or_name + '"')
 
         browser.current_window = first_window
         browser.get_current_window_handle = lambda: browser.current_window.handle

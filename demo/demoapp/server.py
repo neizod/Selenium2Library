@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 #  Copyright 2008-2011 Nokia Siemens Networks Oyj
 #
@@ -25,16 +25,16 @@ number as when starting it.
 
 import os
 import sys
-import httplib
-import BaseHTTPServer
-import SimpleHTTPServer
+import http.client
+import http.server
+import http.server
 
 
 DEFAULT_PORT = 7272
 DEFAULT_HOST = 'localhost'
 
 
-class StoppableHttpServer(BaseHTTPServer.HTTPServer):
+class StoppableHttpServer(http.server.HTTPServer):
 
     def serve_forever(self):
         self.stop = False
@@ -45,7 +45,7 @@ class StoppableHttpServer(BaseHTTPServer.HTTPServer):
                 break
 
 
-class StoppableHttpRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
+class StoppableHttpRequestHandler(http.server.SimpleHTTPRequestHandler):
 
     def do_QUIT(self):
         self.send_response(200)
@@ -60,20 +60,20 @@ class StoppableHttpRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
 
 
 def start_server(host=DEFAULT_HOST, port=DEFAULT_PORT):
-    print "Demo application starting on port %s" % port
+    print("Demo application starting on port %s" % port)
     root  = os.path.dirname(os.path.abspath(__file__))
     os.chdir(root)
     server = StoppableHttpServer((host, int(port)), StoppableHttpRequestHandler)
     server.serve_forever()
 
 def stop_server(host=DEFAULT_HOST, port=DEFAULT_PORT):
-    print "Demo application on port %s stopping" % port
-    conn = httplib.HTTPConnection("%s:%s" % (host, port))
+    print("Demo application on port %s stopping" % port)
+    conn = http.client.HTTPConnection("%s:%s" % (host, port))
     conn.request("QUIT", "/")
     conn.getresponse()
 
 def print_help():
-    print __doc__
+    print(__doc__)
 
 
 if __name__ == '__main__':
@@ -82,4 +82,4 @@ if __name__ == '__main__':
          'stop': stop_server,
          'help': print_help}[sys.argv[1]](*sys.argv[2:])
     except (IndexError, KeyError, TypeError):
-        print 'Usage: %s start|stop|help [port]' % os.path.basename(sys.argv[0])
+        print('Usage: %s start|stop|help [port]' % os.path.basename(sys.argv[0]))

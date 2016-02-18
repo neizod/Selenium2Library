@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import os, shutil
 from buildhtml import Builder
@@ -19,7 +19,7 @@ def main():
     try:
         import docutils
     except:
-        print "Readme files will not be built into HTML, docutils not installed"
+        print("Readme files will not be built into HTML, docutils not installed")
         return
     for readme_relative_path in README_FILES:
         (readme_dir, readme_name) = _parse_readme_path(readme_relative_path)
@@ -36,7 +36,7 @@ def main():
             os.remove(target_readme_html_path)
         os.rename(readme_html_path, target_readme_html_path)
 
-        print "    ::: Saved: %s" % target_readme_html_name
+        print("    ::: Saved: %s" % target_readme_html_name)
 
 def _parse_readme_path(readme_relative_path):
     readme_abs_path = os.path.join(ROOT_DIR, readme_relative_path.replace('/', os.sep))

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 # $Id: buildhtml.py 7037 2011-05-19 08:56:27Z milde $
 # Author: David Goodger <goodger@python.org>
@@ -141,7 +141,7 @@ class Builder:
         config file settings and command-line options by
         `self.get_settings()`.
         """
-        for name, publisher in self.publishers.items():
+        for name, publisher in list(self.publishers.items()):
             option_parser = OptionParser(
                 components=publisher.components, read_config_files=1,
                 usage=usage, description=description)
@@ -197,13 +197,13 @@ class Builder:
         settings = self.get_settings('', directory)
         errout = ErrorOutput(encoding=settings.error_encoding)
         if settings.prune and (os.path.abspath(directory) in settings.prune):
-            print >>errout, ('/// ...Skipping directory (pruned): %s' %
-                              directory)
+            print(('/// ...Skipping directory (pruned): %s' %
+                              directory), file=errout)
             sys.stderr.flush()
             names[:] = []
             return
         if not self.initial_settings.silent:
-            print >>errout, '/// Processing directory: %s' % directory
+            print('/// Processing directory: %s' % directory, file=errout)
             sys.stderr.flush()
         # settings.ignore grows many duplicate entries as we recurse
         # if we add patterns in config files or on the command line.
@@ -232,7 +232,7 @@ class Builder:
         settings._source = os.path.normpath(os.path.join(directory, name))
         settings._destination = settings._source[:-4]+'.html'
         if not self.initial_settings.silent:
-            print >>errout, '    ::: Processing: %s' % name
+            print('    ::: Processing: %s' % name, file=errout)
             sys.stderr.flush()
         try:
             if not settings.dry_run:
@@ -242,8 +242,8 @@ class Builder:
                               parser_name='restructuredtext',
                               writer_name=pub_struct.writer_name,
                               settings=settings)
-        except ApplicationError, error:
-            print >>errout, '        %s' % ErrorString(error)
+        except ApplicationError as error:
+            print('        %s' % ErrorString(error), file=errout)
 
 
 if __name__ == "__main__":

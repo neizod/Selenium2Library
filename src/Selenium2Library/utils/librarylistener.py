@@ -1,4 +1,4 @@
-import events as event
+from . import events as event
 from robot.api import logger
 
 class LibraryListener(object):

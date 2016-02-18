@@ -96,8 +96,8 @@ class BrowserManagementTests(unittest.TestCase):
         try:
             bm._make_browser("fireox")
             self.fail("Exception not raised")
-        except ValueError, e:
-            self.assertEquals("fireox is not a supported browser.", e.message)
+        except ValueError as e:
+            self.assertEqual("fireox is not a supported browser.", e.message)
 
     def test_create_webdriver(self):
         bm = _BrowserManagementWithLoggingStubs()
@@ -110,14 +110,14 @@ class BrowserManagementTests(unittest.TestCase):
         webdriver.FakeWebDriver = FakeWebDriver
         try:
             index = bm.create_webdriver('FakeWebDriver', 'fake', some_arg=1)
-            self.assertEquals(capt_data['some_arg'], 1)
-            self.assertEquals(capt_data['webdriver'], bm._current_browser())
-            self.assertEquals(capt_data['webdriver'], bm._cache.get_connection(index))
-            self.assertEquals(capt_data['webdriver'], bm._cache.get_connection('fake'))
+            self.assertEqual(capt_data['some_arg'], 1)
+            self.assertEqual(capt_data['webdriver'], bm._current_browser())
+            self.assertEqual(capt_data['webdriver'], bm._cache.get_connection(index))
+            self.assertEqual(capt_data['webdriver'], bm._cache.get_connection('fake'))
             capt_data.clear()
             my_kwargs = {'some_arg':2}
             bm.create_webdriver('FakeWebDriver', kwargs=my_kwargs)
-            self.assertEquals(capt_data['some_arg'], 2)
+            self.assertEqual(capt_data['some_arg'], 2)
         finally:
             del webdriver.FakeWebDriver
 

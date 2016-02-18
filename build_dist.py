@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import os, sys, shutil, subprocess, argparse
 
@@ -33,7 +33,7 @@ def clear_dist_folder():
 
 def run_doc_gen():
     import generate
-    print
+    print()
     generate.main()
 
 def run_register(args):
@@ -41,7 +41,7 @@ def run_register(args):
         _run_setup(args.py_27_path, "register", [], False)
 
 def run_builds(args):
-    print
+    print()
     if not args.winonly:
         _run_setup(args.py_27_path, "sdist", [ "--formats=gztar,zip" ], args.release)
         _run_setup(args.py_26_path, "bdist_egg", [], args.release)
@@ -50,12 +50,12 @@ def run_builds(args):
         _run_setup(args.py_27_path, "bdist_wininst", [ "--plat-name=win32" ], args.release)
         _run_setup(args.py_27_path, "bdist_wininst", [ "--plat-name=win-amd64" ], args.release)
     else:
-        print    
+        print()    
         print("Windows binary installers cannot be built on this platform!")    
 
 def run_demo_packaging():
     import package
-    print
+    print()
     package.main()
 
 def _run_setup(py_path, type, params, upload):
@@ -66,8 +66,8 @@ def _run_setup(py_path, type, params, upload):
     if upload:
         setup_args.append("upload")
         
-    print
-    print("Running: %s" % ' '.join(setup_args))
+    print()
+    print(("Running: %s" % ' '.join(setup_args)))
     returncode = subprocess.call(setup_args)
     if returncode != 0:
         print("Error running setup.py")

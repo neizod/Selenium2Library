@@ -1,2 +1,2 @@
 #encoding: utf-8
-unic_text = u'ÄÖÅåöä €€ scandic toimii kivasti'
+unic_text = 'ÄÖÅåöä €€ scandic toimii kivasti'

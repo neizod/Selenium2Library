@@ -1,4 +1,4 @@
-from event import Event
+from .event import Event
 from robot.libraries.BuiltIn import BuiltIn
 
 class ScopeEvent(Event):

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import sys
 from os.path import join, dirname
@@ -8,7 +8,7 @@ from ez_setup import use_setuptools
 use_setuptools()
 from setuptools import setup
 
-execfile(join(dirname(__file__), 'src', 'Selenium2Library', 'version.py'))
+exec(compile(open(join(dirname(__file__), 'src', 'Selenium2Library', 'version.py')).read(), join(dirname(__file__), 'src', 'Selenium2Library', 'version.py'), 'exec'))
 
 DESCRIPTION = """
 Selenium2Library is a web testing library for Robot Framework

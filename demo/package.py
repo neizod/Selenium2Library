@@ -1,11 +1,11 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import os, sys
 from time import localtime
 from zipfile import ZipFile, ZIP_DEFLATED
 
 THIS_DIR = os.path.dirname(os.path.abspath(__file__))
-execfile(os.path.join(THIS_DIR, '..', 'src', 'Selenium2Library', 'version.py'))
+exec(compile(open(os.path.join(THIS_DIR, '..', 'src', 'Selenium2Library', 'version.py')).read(), os.path.join(THIS_DIR, '..', 'src', 'Selenium2Library', 'version.py'), 'exec'))
 
 FILES = {
     '': ['rundemo.py'],
@@ -26,14 +26,14 @@ def main():
         for dirname in FILES:
             for filename in FILES[dirname]:
                 path = os.path.join('.', dirname.replace('/', os.sep), filename)
-                print 'Adding:  ', os.path.normpath(path)
+                print('Adding:  ', os.path.normpath(path))
                 zipfile.write(path, os.path.join(name, path))
         zipfile.close()
         target_path = os.path.join('..', 'dist', zipname)
         if os.path.exists(target_path):
             os.remove(target_path)
         os.rename(zipname, target_path)
-        print 'Created: ', os.path.abspath(target_path)
+        print('Created: ', os.path.abspath(target_path))
     finally:
         os.chdir(cwd)
 
